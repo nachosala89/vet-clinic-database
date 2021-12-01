@@ -12,3 +12,35 @@ CREATE TABLE animals (
 );
 
 ALTER TABLE animals ADD COLUMN species VARCHAR(50);
+
+CREATE TABLE owners (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(100),
+    age INT
+);
+
+CREATE TABLE species (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Make sure that id is set as autoincremented PRIMARY KEY
+CREATE SEQUENCE animals_id_seq;
+ALTER TABLE animals ALTER COLUMN id SET DEFAULT nextval('animals_id_seq');
+ALTER TABLE animals ALTER COLUMN id SET NOT NULL;
+ALTER SEQUENCE animals_id_seq OWNED BY animals.id;
+SELECT setval('animals_id_seq', 10);
+ALTER TABLE animals ADD PRIMARY KEY (id);
+
+-- Remove column species
+ALTER TABLE animals DROP COLUMN species;
+
+-- Add column species_id which is a foreign key referencing species table
+ALTER TABLE animals ADD COLUMN species_id INT;
+ALTER TABLE animals 
+  ADD CONSTRAINT fk_species FOREIGN KEY (species_id) REFERENCES species(id);
+
+-- Add column owner_id which is a foreign key referencing the owners table
+ALTER TABLE animals ADD COLUMN owner_id INT;
+ALTER TABLE animals 
+  ADD CONSTRAINT fk_owners FOREIGN KEY (owner_id) REFERENCES owners(id);
