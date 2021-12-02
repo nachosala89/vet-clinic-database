@@ -61,10 +61,10 @@ CREATE TABLE specializations (
 );
 
 CREATE TABLE visits (
+    id SERIAL PRIMARY KEY,
     vet_id INT,
     animal_id INT,
     visit_date DATE,
-    PRIMARY KEY (vet_id, animal_id),
     CONSTRAINT fk_vet FOREIGN KEY(vet_id) REFERENCES vets(id),
     CONSTRAINT fk_animal FOREIGN KEY(animal_id) REFERENCES animals(id)
 );
