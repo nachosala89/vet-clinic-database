@@ -100,7 +100,13 @@ SELECT species.name FROM animals
   GROUP BY species.name
   ORDER BY COUNT(*) DESC LIMIT 1;
 
--- Perfomance audit queries:
-SELECT COUNT(*) FROM visits where animal_id = 4;
-SELECT * FROM visits where vet_id = 2;
-SELECT * FROM owners where email = 'owner_18327@mail.com';
+-- Performance audit
+-- Queries to analyze:
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animal_id = 4;
+
+-- Before:
+EXPLAIN ANALYZE SELECT * FROM visits where vet_id = 2;
+-- After:
+EXPLAIN ANALYZE SELECT vet_id FROM visits where vet_id = 2;
+
+EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
