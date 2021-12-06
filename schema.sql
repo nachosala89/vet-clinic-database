@@ -78,3 +78,6 @@ CREATE INDEX ON visits (animal_id);
 
 -- Optimization to second query.
 CREATE INDEX ON visits (vet_id);
+
+-- Optimization to third query.
+CREATE INDEX ON OWNERS (email);
