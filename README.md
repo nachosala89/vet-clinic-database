@@ -4,7 +4,7 @@
 
 > This project consists of a relational database which contains the data structure for a vet clinic.
 
-[screenshot](./vet_clinic.png)
+![screenshot](./vet_clinic.png)
 
 ## Getting Started
 
